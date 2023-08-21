@@ -1,5 +1,6 @@
-# AlpineJS Plugin Blueprint
+# Alpine Indeterminate
 
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/victoryoalli/alpinejs-plugin-blueprint)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/daronspence/alpine-indeterminate)
 
-Replace all `plugin` and `magic` text to your corresponding code
+A plugin to show and modify checkbox indeteriminate state with Alpine.js
+
