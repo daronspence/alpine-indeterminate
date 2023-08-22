@@ -26,12 +26,16 @@ A plugin to show and modify [checkbox indeteriminate state](https://developer.mo
 
 The checkbox with the `x-indeterminate` attribute will be set to indeterminate if any of the checkboxes with the matching `x-model` attribute are checked. When all of the items that could be present in the list are added, then the checkbox will transition to `:checked`.
 
+The value of the `x-indeterminate` attribute is the name of an `x-data` array property to track changes for.
+
 You can also assign `x-model` to a boolean value for the indeterminate element and it will be either true/false depending on the state of the other checkboxes. If you need to programattically select or deselect all checkboxes, you can toggle the boolean value.
+
+> Note: Using `x-model` is not required to use the indeterminate checkbox as a toggle for other checkboxes.
 
 ```html
 <div x-data="{
     list: [],
-    allChecked: false,
+    allChecked: false, // optional
 }">
     <!-- Toggle `allChecked` to select all values at once programatically. -->
     <input type="checkbox" x-model="allChecked" x-indeterminate="list">
