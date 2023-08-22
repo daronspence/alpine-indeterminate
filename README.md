@@ -2,7 +2,7 @@
 
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/daronspence/alpine-indeterminate)
 
-A plugin to show and modify checkbox indeteriminate state with Alpine.js
+A plugin to show and modify [checkbox indeteriminate state](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox#indeterminate_state_checkboxes) with Alpine.js
 
 ## Usage
 ```html
