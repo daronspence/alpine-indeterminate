@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Test</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="../dist/plugin.min.js"></script>
+        <script src="http://unpkg.com/alpinejs" defer></script>
+    </head>
+    <body class="p-12">
+        <div x-data="{ otherList: [] }" class="max-w-2xl mx-auto p-4 bg-slate-200 rounded-lg">
+            <h1>Apline Indeterminate</h1>
+
+            <div
+                x-data="{
+                    list: [],
+                }"
+                class="flex gap-4"
+            >
+                <input type="checkbox" x-indeterminate="list" />
+
+                <input type="checkbox" value="1" x-model="list" />
+                <input type="checkbox" value="2" x-model="list" />
+                <input type="checkbox" value="3" x-model="list" />
+                <input type="checkbox" value="4" x-model="list" />
+                <input type="checkbox" value="5" x-model="list" />
+                <input type="checkbox" value="6" x-model="list" />
+                <input type="checkbox" value="7" x-model="list" />
+                <input type="checkbox" value="8" x-model="list" />
+                <input type="checkbox" value="9" x-model="list" />
+            </div>
+        </div>
+    </body>
+</html>

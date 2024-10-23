@@ -14,15 +14,17 @@ __export(exports, {
 // src/index.js
 var AlpineIndeterminate = function(Alpine) {
   Alpine.directive("indeterminate", (el, { expression }, { Alpine: Alpine2, effect, evaluateLater, cleanup, evaluate }) => {
-    const root = Alpine2.closestDataStack(el).find((i) => i.hasOwnProperty(expression)).$el;
+    const root = evaluate("$root");
+    console.log(root);
     const selector = `input[type="checkbox"][x-model="${expression}"]`;
     const hasXModel = el.hasAttribute("x-model");
+    let domCheckboxes = root.querySelectorAll(selector);
     const listener = () => {
       var _a;
-      const domCheckboxes = root.querySelectorAll(selector);
+      const domCheckboxes2 = root.querySelectorAll(selector);
       const checked = root.querySelectorAll(selector + ":checked");
-      if (checked.length < domCheckboxes.length) {
-        domCheckboxes.forEach((domCheckbox) => {
+      if (checked.length < domCheckboxes2.length) {
+        domCheckboxes2.forEach((domCheckbox) => {
           var _a2, _b;
           const model = (_b = (_a2 = domCheckbox._x_model) == null ? void 0 : _a2.get()) != null ? _b : [];
           if (model.includes(domCheckbox.value)) {
@@ -31,19 +33,19 @@ var AlpineIndeterminate = function(Alpine) {
           model.push(domCheckbox.value);
         });
       } else {
-        domCheckboxes[0]._x_model.set([]);
+        domCheckboxes2[0]._x_model.set([]);
         (_a = el._x_model) == null ? void 0 : _a.set(false);
-        setTimeout(() => {
+        Alpine2.nextTick(() => {
           el.dataset.indeterminate = false;
           el.dataset.checked = false;
           el.indeterminate = false;
           el.checked = false;
-        }, 0);
+        });
       }
     };
     function setIndeterminateFromItems(items) {
       var _a;
-      const domCheckboxes = root.querySelectorAll(selector);
+      const domCheckboxes2 = root.querySelectorAll(selector);
       if (items.length === 0) {
         el.dataset.indeterminate = false;
         el.dataset.checked = false;
@@ -51,7 +53,7 @@ var AlpineIndeterminate = function(Alpine) {
         el.checked = false;
         return;
       }
-      if (items.length === domCheckboxes.length) {
+      if (items.length === domCheckboxes2.length) {
         setTimeout(() => {
           var _a2;
           el.dataset.indeterminate = false;
@@ -76,17 +78,17 @@ var AlpineIndeterminate = function(Alpine) {
       effect(() => {
         updateModel((value) => {
           getItemsFromX_Data((items) => {
-            const domCheckboxes = root.querySelectorAll(selector);
+            const domCheckboxes2 = root.querySelectorAll(selector);
             if (value === el._x_indeterminate_previousVal) {
               el._x_indeterminate_previousVal = value;
               return;
             }
             el._x_indeterminate_previousVal = value;
-            if (items.length === domCheckboxes.length && !value) {
+            if (items.length === domCheckboxes2.length && !value) {
               listener();
               return;
             }
-            if (value && domCheckboxes.length !== items.length) {
+            if (value && domCheckboxes2.length !== items.length) {
               listener();
               return;
             }
@@ -99,6 +101,10 @@ var AlpineIndeterminate = function(Alpine) {
         el.removeEventListener("click", listener);
       });
     }
+    effect(() => {
+      console.log("updating checkboxes");
+      domCheckboxes = root.querySelectorAll(selector);
+    });
     effect(() => {
       getItemsFromX_Data((items) => {
         setIndeterminateFromItems(items);
